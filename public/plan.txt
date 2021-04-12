@@ -1,0 +1,9 @@
+>composer global require laravel/installer
+>laravel new laravel.task
+>cd laravel.task
+>php artisan make:controller MovieController -r -m Movie
+>composer require laravel/breeze
+>php artisan breeze:install
+>php artisan make:migration create_movies_table
+>php artisan migrate
+
