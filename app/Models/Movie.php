@@ -12,4 +12,7 @@ class Movie extends Model
     protected $fillable=[
         'title', 'director', 'country', 'overview', 'release_date' ,'poster'
     ];
+    function user(){
+        return $this->belongsTo(User::class);
+    }
 }
