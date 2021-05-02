@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Movie;
+use App\Policies\MoviePolicy;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

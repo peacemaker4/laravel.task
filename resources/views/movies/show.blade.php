@@ -17,13 +17,17 @@
             </li>
         </ul>
         <div class="card-body">
-            <form action="{{route('movies.destroy', $movie)}}" method="post">
-                @csrf @method('delete')
-                <button class="btn btn-danger">Delete</button>
-            </form>
-            <form method="get" action="{{route('movies.edit', $movie)}}">
-                <button class="btn btn-warning">Edit</button>
-            </form>
+            @can('delete', $movie)
+                <form action="{{route('movies.destroy', $movie)}}" method="post">
+                    @csrf @method('delete')
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            @endcan
+            @can('update', $movie)
+                <form method="get" action="{{route('movies.edit', $movie)}}">
+                    <button class="btn btn-warning">Edit</button>
+                </form>
+            @endcan
         </div>
     </div>
 @endsection
