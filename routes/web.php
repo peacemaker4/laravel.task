@@ -10,3 +10,7 @@ Route::get('/', function () {
 });
 
 Route::resource('movies', MovieController::class);
+Route::put('movies/{movie}/removePoster', [MovieController::class, 'removePoster'])
+    ->name('movies.removePoster');
+Route::put('movies/{movie}/removeSubtitles', [MovieController::class, 'removeSubtitles'])
+    ->name('movies.removeSubtitles');

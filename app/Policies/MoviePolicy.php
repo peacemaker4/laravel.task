@@ -28,4 +28,16 @@ class MoviePolicy
     {
         return $user->id==$movie->user_id;
     }
+    public function removePoster(User $user, Movie $movie){
+        if($this->update($user, $movie)){
+            return false;
+        }
+        return $movie->poster!=null;
+    }
+    public function removeSubtitles(User $user, Movie $movie){
+        if($this->update($user, $movie)){
+            return false;
+        }
+        return $movie->subtitles!=null;
+    }
 }

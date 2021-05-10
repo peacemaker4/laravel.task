@@ -39,7 +39,7 @@ class MovieController extends Controller
     {
         $movie=auth()->user()
             ->movies()
-            ->create($request->validated());
+            ->create($request->validatedWithPoster());
         return redirect()->route('movies.show', $movie);
     }
 
@@ -60,13 +60,32 @@ class MovieController extends Controller
     public function update(MovieRequest $request, Movie $movie)
     {
 
-        $movie->update($request->validated());
+        $movie->update($request->validatedWithPoster());
         return redirect()->route('movies.show', $movie);
     }
 
     public function destroy(Movie $movie)
     {
+        $movie->deletePoster();
         $movie->delete();
         return redirect()->route('movies.index');
+    }
+    function removePoster(Movie $movie){
+        $this->authorize('update', $movie);
+
+        $movie->deletePoster();
+        $movie->update([
+            'poster'=>null
+        ]);
+        return back();
+    }
+    function removeSubtitles(Movie $movie){
+        $this->authorize('update', $movie);
+
+        $movie->deleteSubtitles();
+        $movie->update([
+            'subtitles'=>null
+        ]);
+        return back();
     }
 }

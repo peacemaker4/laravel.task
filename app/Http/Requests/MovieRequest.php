@@ -38,4 +38,26 @@ class MovieRequest extends FormRequest
             ]
         ];
     }
+    function validatedWithPoster(){
+        $data=$this->validated();
+
+        if($this->hasFile('poster')){
+            /** @var Movie $movie */
+            if($movie=$this->route('movies')){
+                $movie->deletePoster();
+            }
+
+            $data['poster']=$this->file('poster')->store('public/images');
+        }
+        if($this->hasFile('subtitles')){
+            /** @var Movie $movie */
+            if($movie=$this->route('movies')){
+                $movie->deleteSubtitles();
+            }
+
+            $data['subtitles']=$this->file('subtitles')->store('public/subtitles');
+        }
+
+        return $data;
+    }
 }
